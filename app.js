@@ -1,0 +1,20 @@
+const express = require('express');
+const app = express();
+
+
+const path = require('path');
+
+// Set our views directory
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use('/css', express.static('assets/css'));
+app.use('/javascript', express.static('assets/javascript'));
+app.use('/images', express.static('assets/images'));
+
+// Our routes
+const routes = require('./routes.js');
+app.use('/', routes);
+
+// Start our server
+app.listen(process.env.PORT || 3000, port => console.log(`Listening on port ${port}`));
